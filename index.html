@@ -182,7 +182,7 @@
             now_seconds = timeprocess(now_seconds)
             const time = now_hours + ':' + now_minutes + ':' + now_seconds
             document.getElementById('time').innerHTML = time
-            t = setTimeout(function() {
+            setTimeout(function() {
                 rendertime()
             }, 500);
 
