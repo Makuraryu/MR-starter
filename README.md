@@ -7,3 +7,6 @@ a simple but beautiful starter page
 页面设计参考自zorin os主页（https://start.zorin.com/
 ）
 和青柠起始页(http://limestart.cn)
+
+搜索引擎使用F搜（https://fsoufsou.com/
+）
