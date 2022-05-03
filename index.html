@@ -18,6 +18,23 @@
         overflow-x: hidden;
     }
     
+    #hello {
+        background-color: rgb(252, 250, 242, 0.6);
+        color: #7b90d2;
+        backdrop-filter: blur(5px);
+        position: absolute;
+        left: 46%;
+        width: 130px;
+        height: 50px;
+        text-align: center;
+        border-radius: 25px;
+        line-height: 50px;
+        font-size: larger;
+        font-weight: bold;
+        text-indent: 10px;
+        animation: hello 2s forwards;
+    }
+    
     #researchbox {
         background-color: rgba(0, 0, 0, 0);
         position: absolute;
@@ -146,6 +163,21 @@
             backdrop-filter: blur(5px);
         }
     }
+    
+    @keyframes hello {
+        0% {
+            transform: translateY(-70px);
+        }
+        40% {
+            transform: translateY(30px);
+        }
+        60% {
+            transform: translateY(30px);
+        }
+        100% {
+            transform: translateY(-70px);
+        }
+    }
 </style>
 
 <body>
@@ -157,6 +189,7 @@
         <a href="#" id="hitokoto" title="由「一言」支持" target="view_window">:D 获取中...</a>
     </div>
     <a class="github" href="https://github.com/Makuraryu/MR-starter" target="view_window">🚀 github</a>
+    <div id="hello">你好！</div>
 
     <script>
         let hand = ['👌 ', '🤙 ', '👋', '✍️', '✌️']
@@ -164,6 +197,7 @@
         window.document.onkeydown = disableRefresh;
         window.onload = rendertime()
         sertext()
+        renderhello()
 
         function disableRefresh(evt) {
             evt = (evt) ? evt : window.event
@@ -177,8 +211,34 @@
         function gotoser() {
             const golink = "https://fsoufsou.com/search?q=" + researchbox.value
             window.open(golink)
+            researchbox.value = ""
         }
 
+
+        function renderhello() {
+            const hello = document.getElementById("hello")
+            const now = new Date()
+            var time = now.getHours()
+            if (0 <= time <= 5) {
+                hello.innerText = "凌晨好！"
+            } else {
+                if (5 < time <= 11) {
+                    hello.innerText = "早上好！"
+                } else {
+                    if (11 < time <= 13) {
+                        hello.innerText = "中午好！"
+                    } else {
+                        if (13 < time <= 17) {
+                            hello.innerText = "下午好！"
+                        } else {
+                            if (17 < time < 24) {
+                                hello.innerText = "晚上好！"
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
 
         function rendertime() {
