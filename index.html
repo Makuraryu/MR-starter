@@ -211,7 +211,7 @@
             .then(data => {
                 const hitokoto = document.getElementById('hitokoto')
                 hitokoto.href = 'https://hitokoto.cn/?uuid=' + data.uuid
-                hitokoto.innerText = data.hitokoto
+                hitokoto.innerText = "『" + data.hitokoto + "』"
             })
             .catch(console.error)
 
