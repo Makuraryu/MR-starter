@@ -22,7 +22,7 @@
         text-align: center;
         top: 25%;
         width: 100%;
-        height: 20%;
+        height: max-content;
         font-size: 600%;
         border: 0ch;
         opacity: 0.4;
@@ -145,7 +145,7 @@
 
 <body>
 
-    <input type="text" id="researchbox" placeholder="Search👋!">
+    <input type="text" id="researchbox">
 
     <a id="time" href="https://time.is/zh/" title="点击跳转到世界时钟"></a>
     <div id="yiyan">
@@ -154,9 +154,11 @@
     <a class="github" href="https://github.com/Makuraryu/MR-starter" target="view_window">🚀 github</a>
 
     <script>
+        let hand = ['👌 ', '🤙 ', '👋', '✍️', '✌️']
         const researchbox = document.getElementById("researchbox")
         window.document.onkeydown = disableRefresh;
         window.onload = rendertime()
+        sertext()
 
         function disableRefresh(evt) {
             evt = (evt) ? evt : window.event
@@ -207,6 +209,21 @@
                 hitokoto.innerText = data.hitokoto
             })
             .catch(console.error)
+
+
+        function randomValueFromArray(array) {
+            const random = Math.floor(Math.random() * array.length);
+            return array[random];
+        }
+
+
+
+        function sertext() {
+            let serhand = randomValueFromArray(hand)
+            var serct = "Search" + serhand + "!"
+            researchbox.setAttribute("placeholder", serct)
+
+        }
     </script>
 
 
