@@ -10,3 +10,9 @@ a simple but beautiful starter page
 
 搜索引擎使用F搜（https://fsoufsou.com/
 ）
+
+使用了一言（https://hitokoto.cn/
+）
+的API
+和https://time.is/zh/
+的链接
