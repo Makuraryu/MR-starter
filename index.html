@@ -315,8 +315,10 @@
         renderhello()
 
 
+
         researchbox.addEventListener("click", linking)
         document.getElementById("whole").addEventListener("click", gniknil)
+
 
         function linking() {
             document.getElementById("yiyan").style.animation = 'disappear 0.3s forwards'
@@ -429,7 +431,7 @@
                 this.renderlinks()
             }
             renderlinks() {
-                let linker = "window.open('" + this.links + "')"
+                let linker = "window.open('" + this.links + "')," + "gniknil()"
                 const link = document.createElement("div")
                 link.setAttribute("id", this.name)
                 link.setAttribute("onclick", linker)
