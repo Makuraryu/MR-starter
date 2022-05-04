@@ -18,6 +18,14 @@
         overflow-x: hidden;
     }
     
+    #whole {
+        position: absolute;
+        background-color: #7b90d2;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+    }
+    
     #hello {
         background-color: rgb(252, 250, 242, 0.3);
         color: #7b90d2;
@@ -65,7 +73,8 @@
         color: #7b90d2;
         opacity: 0.3;
         font-size: 120%;
-        width: 100%;
+        width: 10%;
+        left: 45%;
         top: 47%;
         text-align: center;
         text-decoration: none;
@@ -83,6 +92,7 @@
         position: absolute;
         text-align: center;
         width: 100%;
+        animation: appear 0s forwards;
     }
     
     #yiyan:hover {
@@ -101,6 +111,7 @@
         font-family: mincho;
         font-size: 130%;
         opacity: 0.7;
+        visibility: inherit;
     }
     
     .github {
@@ -113,6 +124,42 @@
         font-family: mincho;
         font-size: 100%;
         opacity: 0.7;
+    }
+    
+    #links {
+        background-color: rgba(125, 185, 222, .4);
+        backdrop-filter: blur(5px);
+        height: 15%;
+        bottom: 15%;
+        border-radius: 20px;
+        left: 15%;
+        align-items: center;
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        position: absolute;
+        bottom: 15%;
+        animation: disappear 0s forwards;
+        visibility: hidden;
+    }
+    
+    #links>div {
+        background-color: rgba(123, 144, 210, 0.4);
+        margin: 0 auto;
+        height: 60px;
+        width: 60px;
+        border-radius: 10px;
+        display: inherit;
+        cursor: pointer;
+    }
+    
+    #links>div>img {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0 auto;
+        display: inherit;
     }
     
     @font-face {
@@ -177,10 +224,32 @@
             transform: translateY(-70px);
         }
     }
+    
+    @keyframes appear {
+        0% {
+            opacity: 0%;
+            visibility: hidden;
+        }
+        100% {
+            opacity: 100%;
+            visibility: visible;
+        }
+    }
+    
+    @keyframes disappear {
+        0% {
+            opacity: 100%;
+            visibility: visible;
+        }
+        100% {
+            opacity: 0%;
+            visibility: hidden;
+        }
+    }
 </style>
 
 <body>
-
+    <div id="whole"></div>
     <input type="text" id="researchbox">
 
     <a id="time" href="https://time.is/zh/" title="点击跳转到世界时钟" target="view_window"></a>
@@ -189,14 +258,32 @@
     </div>
     <a class="github" href="https://github.com/Makuraryu/MR-starter" target="view_window">🚀 github</a>
     <div id="hello">你好！</div>
+    <div id="links"></div>
 
     <script>
         let hand = ['👌 ', '🤙 ', '👋', '✍️', '✌️']
         const researchbox = document.getElementById("researchbox")
+        var linkappear = 0
         window.document.onkeydown = disableRefresh;
         window.onload = rendertime()
         sertext()
         renderhello()
+
+
+        researchbox.addEventListener("click", linking)
+        document.getElementById("whole").addEventListener("click", gniknil)
+
+        function linking() {
+            document.getElementById("yiyan").style.animation = 'disappear 0.3s forwards'
+            document.getElementById("links").style.animation = 'appear 0.3s forwards'
+        }
+
+        function gniknil() {
+            document.getElementById("yiyan").style.animation = ''
+            document.getElementById("links").style.animation = 'disappear 0.3s forwards'
+
+        }
+
 
         function disableRefresh(evt) {
             evt = (evt) ? evt : window.event
@@ -218,26 +305,23 @@
             const hello = document.getElementById("hello")
             const now = new Date()
             var time = now.getHours()
-            if (0 <= time <= 5) {
+            if (time <= 5) {
                 hello.innerText = "凌晨好！"
-            } else {
-                if (5 < time <= 11) {
-                    hello.innerText = "早上好！"
-                } else {
-                    if (11 < time <= 13) {
-                        hello.innerText = "中午好！"
-                    } else {
-                        if (13 < time <= 17) {
-                            hello.innerText = "下午好！"
-                        } else {
-                            if (17 < time < 24) {
-                                hello.innerText = "晚上好！"
-                            }
-                        }
-                    }
-                }
+            } else
+            if (time <= 10) {
+                hello.innerText = "早上好！"
+            } else
+            if (time <= 12) {
+                hello.innerText = "中午好！"
+            } else
+            if (time <= 17) {
+                hello.innerText = "下午好！"
+            } else
+            if (time < 24) {
+                hello.innerText = "晚上好！"
             }
         }
+
 
 
         function rendertime() {
@@ -288,6 +372,57 @@
             researchbox.setAttribute("placeholder", serct)
 
         }
+
+
+
+        class links {
+            constructor(name, icon, links) {
+                this.name = name
+                this.icon = icon
+                this.links = links
+                this.renderlinks()
+            }
+            renderlinks() {
+                let linker = "window.open('" + this.links + "')"
+                const link = document.createElement("div")
+                link.setAttribute("id", this.name)
+                link.setAttribute("onclick", linker)
+                const icon = document.createElement("img")
+                icon.setAttribute("src", this.icon)
+                icon.setAttribute("height", "30px")
+                icon.setAttribute("width", "30px")
+                document.getElementById("links").appendChild(link)
+                document.getElementById(this.name).appendChild(icon)
+            }
+        }
+
+        const data = [{
+            name: "bilibili",
+            icon: "https://www.bilibili.com/favicon.ico?v=1",
+            links: "http://bilibili.com"
+        }, {
+            name: "github",
+            icon: "https://github.com/fluidicon.png",
+            links: "https://github.com/"
+        }, {
+            name: "yuque",
+            icon: "https://gw.alipayobjects.com/zos/rmsportal/UTjFYEzMSYVwzxIGVhMu.png",
+            links: "https://www.yuque.com/dashboard"
+        }, {
+            name: "wangyiyun",
+            icon: "http://p3.music.126.net/tBTNafgjNnTL1KlZMt7lVA==/18885211718935735.jpg",
+            links: "https://music.163.com/"
+        }, {
+            name: "fanyi",
+            icon: "http://ssl.gstatic.com/translate/favicon.ico",
+            links: "https://translate.google.cn/"
+        }]
+
+        data.map(
+            item => {
+                new links(item.name, item.icon, item.links)
+            }
+        )
     </script>
 
 
